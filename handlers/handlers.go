@@ -27,10 +27,6 @@ func (s *RegistrationHandler) HandleRegistrationRequest(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	if req.PAN == "" || req.Number == "" {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "PAN or number cannot be empty"})
-		return
-	}
 	err := s.service.ValidateAndSaveRequest(req)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "User Details could not be processed " + err.Error()})
